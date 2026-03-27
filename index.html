@@ -1,0 +1,2269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Caveat Management — Med Spa Lead Recovery Systems</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400;500&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>emailjs.init('imf2RFoYxnvUV_7PK');</script>
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #080a0f;
+    --bg2: #0d1018;
+    --bg3: #111520;
+    --glass: rgba(255,255,255,0.03);
+    --glass2: rgba(255,255,255,0.06);
+    --border: rgba(255,255,255,0.07);
+    --border2: rgba(255,255,255,0.12);
+    --accent: #c8a96e;
+    --accent2: #e8c98e;
+    --accent-dim: rgba(200,169,110,0.15);
+    --accent-glow: rgba(200,169,110,0.08);
+    --text: #e8e6e0;
+    --text2: #9a9690;
+    --text3: #5a5852;
+    --green: #4a9e6b;
+    --green-dim: rgba(74,158,107,0.15);
+    --red: #9e4a4a;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Syne', sans-serif;
+    overflow-x: hidden;
+    cursor: default;
+  }
+
+  /* NOISE TEXTURE OVERLAY */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.4;
+  }
+
+  /* NAVIGATION */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 48px;
+    height: 72px;
+    background: rgba(8,10,15,0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+  }
+
+  .nav-logo-mark {
+    width: 32px;
+    height: 32px;
+    border: 1px solid var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .nav-logo-mark::before {
+    content: '';
+    position: absolute;
+    inset: 3px;
+    background: var(--accent);
+    opacity: 0.2;
+  }
+
+  .nav-logo-mark span {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--accent);
+    position: relative;
+    z-index: 1;
+  }
+
+  .nav-logo-text {
+    font-family: 'Syne', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text);
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 36px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text2);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--accent); }
+
+  .nav-cta {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent) !important;
+    border: 1px solid var(--accent);
+    padding: 8px 20px;
+    transition: background 0.2s !important;
+  }
+
+  .nav-cta:hover { background: var(--accent-dim) !important; }
+
+  /* PAGE SECTIONS */
+  .page { display: none; }
+  .page.active { display: block; }
+
+  /* ===== HOME PAGE ===== */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 120px 48px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* GRID BACKGROUND */
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(200,169,110,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(200,169,110,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black 30%, transparent 100%);
+  }
+
+  /* AMBIENT GLOW */
+  .hero-glow {
+    position: absolute;
+    width: 800px;
+    height: 800px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(200,169,110,0.06) 0%, transparent 70%);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+
+  .hero-glow-2 {
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(74,158,107,0.05) 0%, transparent 70%);
+    top: 20%;
+    right: 10%;
+    pointer-events: none;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 900px;
+  }
+
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 36px;
+  }
+
+  .hero-tag-line {
+    width: 32px;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  .hero-tag-text {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .hero-headline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(52px, 7vw, 96px);
+    font-weight: 300;
+    line-height: 1.0;
+    letter-spacing: -0.01em;
+    color: var(--text);
+    margin-bottom: 16px;
+  }
+
+  .hero-headline em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .hero-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(20px, 2.5vw, 28px);
+    font-weight: 300;
+    color: var(--text2);
+    line-height: 1.5;
+    max-width: 580px;
+    margin-bottom: 56px;
+  }
+
+  .hero-actions {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--accent);
+    color: #080a0f;
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 16px 32px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-primary::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: white;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  .btn-primary:hover::after { opacity: 0.1; }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: transparent;
+    color: var(--text2);
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 16px 0;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: color 0.2s;
+  }
+
+  .btn-secondary:hover { color: var(--text); }
+
+  .btn-arrow {
+    font-size: 16px;
+    transition: transform 0.2s;
+  }
+
+  .btn-secondary:hover .btn-arrow { transform: translateX(4px); }
+
+  /* STATS STRIP */
+  .stats-strip {
+    position: relative;
+    z-index: 2;
+    margin-top: 80px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    max-width: 800px;
+  }
+
+  .stat-cell {
+    background: var(--bg);
+    padding: 28px 32px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .stat-cell::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .stat-cell:hover::before { opacity: 1; }
+
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px;
+    font-weight: 600;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .stat-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text3);
+  }
+
+  /* DASHBOARD PANEL (right side) */
+  .hero-dashboard {
+    position: absolute;
+    right: -20px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 460px;
+    z-index: 2;
+    opacity: 0.85;
+  }
+
+  .dashboard-panel {
+    background: var(--glass);
+    border: 1px solid var(--border2);
+    backdrop-filter: blur(20px);
+    padding: 24px;
+    position: relative;
+  }
+
+  .dashboard-panel::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  }
+
+  .dashboard-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .dashboard-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text3);
+  }
+
+  .status-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--green);
+    box-shadow: 0 0 8px var(--green);
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  .metric-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .metric-row:last-child { border-bottom: none; }
+
+  .metric-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    color: var(--text3);
+  }
+
+  .metric-value {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .metric-badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    padding: 3px 8px;
+    background: var(--green-dim);
+    color: var(--green);
+    border: 1px solid rgba(74,158,107,0.2);
+  }
+
+  .progress-bar {
+    width: 100%;
+    height: 2px;
+    background: var(--border);
+    margin-top: 8px;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    transition: width 1s ease;
+  }
+
+  /* SECTION STYLES */
+  section {
+    padding: 100px 48px;
+    position: relative;
+  }
+
+  .section-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+
+  .section-tag-line {
+    width: 24px;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  .section-tag-text {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(36px, 4vw, 56px);
+    font-weight: 300;
+    line-height: 1.1;
+    color: var(--text);
+    margin-bottom: 20px;
+  }
+
+  .section-title em { font-style: italic; color: var(--accent); }
+
+  .section-body {
+    font-family: 'Syne', sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.7;
+    color: var(--text2);
+    max-width: 520px;
+  }
+
+  /* PROBLEM SECTION */
+  .problem-section {
+    background: var(--bg2);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .problem-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+    margin-top: 60px;
+  }
+
+  .problem-items {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .problem-item {
+    display: flex;
+    gap: 20px;
+    padding: 24px 0;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+  }
+
+  .problem-item:first-child { border-top: 1px solid var(--border); }
+
+  .problem-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--text3);
+    letter-spacing: 0.1em;
+    padding-top: 3px;
+    min-width: 28px;
+  }
+
+  .problem-content h4 {
+    font-family: 'Syne', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 6px;
+    letter-spacing: 0.02em;
+  }
+
+  .problem-content p {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--text3);
+    line-height: 1.6;
+    letter-spacing: 0.03em;
+  }
+
+  /* LEAK VISUAL */
+  .leak-visual {
+    background: var(--glass);
+    border: 1px solid var(--border);
+    padding: 32px;
+    position: relative;
+  }
+
+  .leak-visual::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(158,74,74,0.6), transparent);
+  }
+
+  .leak-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text3);
+    margin-bottom: 24px;
+  }
+
+  .funnel-step {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 16px;
+    margin-bottom: 2px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .funnel-step::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    background: var(--accent-glow);
+    transition: width 0.8s ease;
+  }
+
+  .funnel-step.full::before { width: 100%; background: rgba(74,158,107,0.08); }
+  .funnel-step.high::before { width: 75%; }
+  .funnel-step.mid::before { width: 48%; background: rgba(200,169,110,0.06); }
+  .funnel-step.low::before { width: 25%; background: rgba(158,74,74,0.08); }
+  .funnel-step.vlow::before { width: 12%; background: rgba(158,74,74,0.12); }
+
+  .funnel-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    color: var(--text2);
+    position: relative;
+    z-index: 1;
+  }
+
+  .funnel-pct {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 600;
+    position: relative;
+    z-index: 1;
+  }
+
+  .funnel-pct.green { color: var(--green); }
+  .funnel-pct.gold { color: var(--accent); }
+  .funnel-pct.red { color: #c97070; }
+
+  /* SERVICES PREVIEW */
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin-top: 60px;
+  }
+
+  .service-card {
+    background: var(--bg);
+    padding: 40px 36px;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+
+  .service-card:hover { background: var(--glass); }
+
+  .service-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .service-card:hover::after { opacity: 1; }
+
+  .service-icon {
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--border2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
+    position: relative;
+  }
+
+  .service-icon-inner {
+    width: 12px;
+    height: 12px;
+    background: var(--accent);
+    opacity: 0.6;
+  }
+
+  .service-num {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    font-family: 'DM Mono', monospace;
+    font-size: 8px;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+  }
+
+  .service-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 12px;
+    letter-spacing: 0.01em;
+  }
+
+  .service-desc {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--text3);
+    line-height: 1.7;
+    letter-spacing: 0.03em;
+  }
+
+  /* TRUST BAND */
+  .trust-band {
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    background: var(--bg2);
+    padding: 60px 48px;
+    display: flex;
+    align-items: center;
+    gap: 60px;
+    overflow: hidden;
+  }
+
+  .trust-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text3);
+    white-space: nowrap;
+    min-width: 120px;
+  }
+
+  .trust-divider {
+    width: 1px;
+    height: 40px;
+    background: var(--border2);
+    flex-shrink: 0;
+  }
+
+  .trust-items {
+    display: flex;
+    gap: 48px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .trust-item {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-weight: 400;
+    color: var(--text2);
+    white-space: nowrap;
+  }
+
+  /* CTA SECTION */
+  .cta-section {
+    padding: 120px 48px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-section::before {
+    content: '';
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(200,169,110,0.06) 0%, transparent 70%);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+
+  .cta-headline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(40px, 5vw, 68px);
+    font-weight: 300;
+    line-height: 1.1;
+    color: var(--text);
+    margin-bottom: 24px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .cta-sub {
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    color: var(--text2);
+    letter-spacing: 0.08em;
+    margin-bottom: 48px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .cta-actions {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* FOOTER */
+  footer {
+    padding: 48px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .footer-copy {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    color: var(--text3);
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+
+  .footer-links a {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    color: var(--text3);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-links a:hover { color: var(--accent); }
+
+  /* ===== SERVICES PAGE ===== */
+  .page-hero {
+    padding: 140px 48px 80px;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .page-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(200,169,110,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(200,169,110,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 60% 80% at 20% 50%, black 20%, transparent 100%);
+  }
+
+  .page-hero-content { position: relative; z-index: 1; max-width: 700px; }
+
+  .services-detail {
+    padding: 80px 48px;
+  }
+
+  .service-detail-item {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+    padding: 80px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .service-detail-item:first-child { padding-top: 0; }
+  .service-detail-item:last-child { border-bottom: none; }
+  .service-detail-item:nth-child(even) .service-detail-visual { order: -1; }
+
+  .service-detail-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 16px;
+  }
+
+  .service-detail-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 42px;
+    font-weight: 300;
+    color: var(--text);
+    line-height: 1.1;
+    margin-bottom: 20px;
+  }
+
+  .service-detail-body {
+    font-family: 'Syne', sans-serif;
+    font-size: 14px;
+    color: var(--text2);
+    line-height: 1.8;
+    margin-bottom: 28px;
+  }
+
+  .service-outcomes {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .outcome-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--text2);
+    letter-spacing: 0.05em;
+  }
+
+  .outcome-dot {
+    width: 4px;
+    height: 4px;
+    background: var(--accent);
+    flex-shrink: 0;
+  }
+
+  .service-detail-visual {
+    background: var(--glass);
+    border: 1px solid var(--border);
+    padding: 32px;
+    position: relative;
+  }
+
+  .service-detail-visual::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  }
+
+  .visual-metric {
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .visual-metric:last-child { margin-bottom: 0; padding-bottom: 0; border: none; }
+
+  .visual-metric-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text3);
+    margin-bottom: 8px;
+  }
+
+  .visual-metric-value {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 40px;
+    font-weight: 600;
+    color: var(--accent);
+    line-height: 1;
+  }
+
+  .visual-metric-sub {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--text3);
+    margin-top: 4px;
+    letter-spacing: 0.05em;
+  }
+
+  /* ===== PROCESS PAGE ===== */
+  .process-track {
+    padding: 80px 48px;
+    position: relative;
+  }
+
+  .process-track::before {
+    content: '';
+    position: absolute;
+    left: 48px;
+    top: 80px;
+    bottom: 80px;
+    width: 1px;
+    background: linear-gradient(to bottom, transparent, var(--accent), transparent);
+  }
+
+  .process-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-left: 48px;
+    padding-left: 60px;
+    border-left: 1px solid var(--border);
+    position: relative;
+    z-index: 1;
+  }
+
+  .process-step {
+    padding: 48px 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+  }
+
+  .process-step:last-child { border-bottom: none; }
+
+  .process-step::before {
+    content: '';
+    position: absolute;
+    left: -68px;
+    top: 60px;
+    width: 16px;
+    height: 16px;
+    border: 1px solid var(--accent);
+    background: var(--bg);
+  }
+
+  .process-step::after {
+    content: '';
+    position: absolute;
+    left: -64px;
+    top: 64px;
+    width: 8px;
+    height: 8px;
+    background: var(--accent);
+  }
+
+  .process-step-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: var(--text3);
+    margin-bottom: 12px;
+  }
+
+  .process-step-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px;
+    font-weight: 300;
+    color: var(--text);
+    margin-bottom: 16px;
+    line-height: 1.1;
+  }
+
+  .process-step-body {
+    font-family: 'Syne', sans-serif;
+    font-size: 14px;
+    color: var(--text2);
+    line-height: 1.8;
+  }
+
+  .process-panel {
+    background: var(--glass);
+    border: 1px solid var(--border);
+    padding: 28px;
+  }
+
+  .process-panel-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text3);
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .process-action {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .process-action:last-child { border-bottom: none; }
+
+  .process-action-icon {
+    width: 24px;
+    height: 24px;
+    border: 1px solid var(--border2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .process-action-dot { width: 6px; height: 6px; background: var(--accent); opacity: 0.6; }
+
+  .process-action-text {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--text2);
+    letter-spacing: 0.04em;
+  }
+
+  /* ===== WHY PAGE ===== */
+  .why-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin-top: 60px;
+  }
+
+  .why-card {
+    background: var(--bg);
+    padding: 48px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .why-card-accent {
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px;
+    height: 60px;
+    background: var(--accent);
+    opacity: 0.6;
+  }
+
+  .why-card-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 300;
+    color: var(--text);
+    margin-bottom: 16px;
+    line-height: 1.2;
+  }
+
+  .why-card-body {
+    font-family: 'Syne', sans-serif;
+    font-size: 14px;
+    color: var(--text2);
+    line-height: 1.8;
+  }
+
+  .comparison-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 60px;
+    border: 1px solid var(--border);
+  }
+
+  .comparison-table th {
+    padding: 20px 28px;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text3);
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg2);
+  }
+
+  .comparison-table th:nth-child(2) { color: var(--accent); }
+
+  .comparison-table td {
+    padding: 18px 28px;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .comparison-table tr:last-child td { border-bottom: none; }
+
+  .comparison-table td:first-child { color: var(--text3); }
+  .comparison-table td:nth-child(2) { color: var(--green); background: rgba(74,158,107,0.03); }
+  .comparison-table td:nth-child(3) { color: var(--text3); }
+
+  /* ===== CONTACT PAGE ===== */
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    padding: 80px 48px;
+    align-items: start;
+  }
+
+  .contact-form-panel {
+    background: var(--glass);
+    border: 1px solid var(--border);
+    padding: 40px;
+    position: relative;
+  }
+
+  .contact-form-panel::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  }
+
+  .form-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text3);
+    display: block;
+    margin-bottom: 10px;
+  }
+
+  .form-input, .form-select, .form-textarea {
+    width: 100%;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.05em;
+    padding: 14px 16px;
+    margin-bottom: 24px;
+    outline: none;
+    transition: border-color 0.2s;
+    appearance: none;
+  }
+
+  .form-input:focus, .form-textarea:focus, .form-select:focus {
+    border-color: var(--accent);
+  }
+
+  .form-textarea {
+    height: 120px;
+    resize: none;
+    font-family: 'DM Mono', monospace;
+  }
+
+  .form-select option { background: var(--bg); }
+
+  .contact-info h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 42px;
+    font-weight: 300;
+    color: var(--text);
+    margin-bottom: 20px;
+    line-height: 1.1;
+  }
+
+  .contact-info p {
+    font-family: 'Syne', sans-serif;
+    font-size: 14px;
+    color: var(--text2);
+    line-height: 1.8;
+    margin-bottom: 48px;
+  }
+
+  .contact-guarantee {
+    background: var(--glass);
+    border: 1px solid var(--border);
+    padding: 28px;
+    position: relative;
+  }
+
+  .contact-guarantee::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px;
+    height: 100%;
+    background: var(--accent);
+    opacity: 0.5;
+  }
+
+  .guarantee-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 10px;
+    letter-spacing: 0.02em;
+  }
+
+  .guarantee-body {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--text3);
+    line-height: 1.7;
+    letter-spacing: 0.03em;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .animate-in {
+    animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .delay-1 { animation-delay: 0.1s; opacity: 0; }
+  .delay-2 { animation-delay: 0.2s; opacity: 0; }
+  .delay-3 { animation-delay: 0.35s; opacity: 0; }
+  .delay-4 { animation-delay: 0.5s; opacity: 0; }
+  .delay-5 { animation-delay: 0.65s; opacity: 0; }
+
+  /* RESPONSIVE */
+  @media (max-width: 1100px) {
+    .hero-dashboard { display: none; }
+    .stats-strip { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (max-width: 768px) {
+    nav { padding: 0 24px; }
+    .nav-links { display: none; }
+    section, .page-hero, .services-detail, .process-track, .contact-grid { padding-left: 24px; padding-right: 24px; }
+    .problem-grid, .service-detail-item, .process-step, .why-grid, .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+    .services-grid { grid-template-columns: 1fr; }
+    .stats-strip { grid-template-columns: 1fr 1fr; }
+    .hero { padding: 100px 24px 60px; }
+    .trust-band { padding: 40px 24px; flex-wrap: wrap; gap: 24px; }
+    footer { flex-direction: column; gap: 20px; padding: 32px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav>
+  <a class="nav-logo" href="#" onclick="showPage('home')">
+    <div class="nav-logo-mark"><span>C</span></div>
+    <span class="nav-logo-text">Caveat Management</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#" onclick="showPage('home')">Home</a></li>
+    <li><a href="#" onclick="showPage('services')">Services</a></li>
+    <li><a href="#" onclick="showPage('process')">Process</a></li>
+    <li><a href="#" onclick="showPage('why')">Why Us</a></li>
+    <li><a href="#" onclick="showPage('contact')" class="nav-cta">Request Breakdown</a></li>
+  </ul>
+</nav>
+
+<!-- ============================= HOME PAGE ============================= -->
+<div id="page-home" class="page active">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-glow"></div>
+    <div class="hero-glow-2"></div>
+
+    <div class="hero-content">
+      <div class="hero-tag animate-in delay-1">
+        <div class="hero-tag-line"></div>
+        <span class="hero-tag-text">Med Spa Lead Recovery Systems</span>
+      </div>
+
+      <h1 class="hero-headline animate-in delay-2">
+        Your med spa<br>
+        is <em>losing revenue</em><br>
+        you already earned.
+      </h1>
+
+      <p class="hero-sub animate-in delay-3">
+        We install structured systems that convert more of your existing inquiries into booked consultations — through speed-to-lead, disciplined follow-up, and missed-call recovery.
+      </p>
+
+      <div class="hero-actions animate-in delay-4">
+        <button class="btn-primary" onclick="showPage('contact')">
+          Request a Revenue Breakdown
+          <span class="btn-arrow">→</span>
+        </button>
+        <button class="btn-secondary" onclick="showPage('services')">
+          See How It Works <span class="btn-arrow">→</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- FLOATING DASHBOARD -->
+    <div class="hero-dashboard animate-in delay-5">
+      <div class="dashboard-panel">
+        <div class="dashboard-header">
+          <span class="dashboard-title">Lead Recovery — Live View</span>
+          <div class="status-dot"></div>
+        </div>
+        <div class="metric-row">
+          <span class="metric-label">Speed to Lead</span>
+          <span class="metric-value">2 min</span>
+          <span class="metric-badge">↑ Active</span>
+        </div>
+        <div style="height:4px;"></div>
+        <div class="progress-bar"><div class="progress-fill" style="width:94%"></div></div>
+        <div style="height:20px;"></div>
+        <div class="metric-row">
+          <span class="metric-label">Follow-Up Sequences</span>
+          <span class="metric-value">7-touch</span>
+        </div>
+        <div style="height:4px;"></div>
+        <div class="progress-bar"><div class="progress-fill" style="width:100%"></div></div>
+        <div style="height:20px;"></div>
+        <div class="metric-row">
+          <span class="metric-label">Missed Call Recovery</span>
+          <span class="metric-value">Auto</span>
+          <span class="metric-badge">↑ Active</span>
+        </div>
+        <div style="height:4px;"></div>
+        <div class="progress-bar"><div class="progress-fill" style="width:82%"></div></div>
+        <div style="height:20px;"></div>
+        <div class="metric-row">
+          <span class="metric-label">30-day Consultations Recovered</span>
+          <span class="metric-value">+38</span>
+        </div>
+        <div style="height:4px;"></div>
+        <div class="progress-bar"><div class="progress-fill" style="width:76%"></div></div>
+      </div>
+    </div>
+
+    <!-- STATS STRIP -->
+    <div class="stats-strip animate-in delay-5">
+      <div class="stat-cell">
+        <div class="stat-num">78%</div>
+        <div class="stat-label">of leads go cold in 5 min</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-num">6–8×</div>
+        <div class="stat-label">more likely to convert if responded within 1 min</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-num">30%</div>
+        <div class="stat-label">avg revenue lost to front-desk leakage</div>
+      </div>
+      <div class="stat-cell">
+        <div class="stat-num">$0</div>
+        <div class="stat-label">spent on new ad spend to see results</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROBLEM SECTION -->
+  <section class="problem-section">
+    <div class="section-tag">
+      <div class="section-tag-line"></div>
+      <span class="section-tag-text">The Problem</span>
+    </div>
+    <h2 class="section-title">Most med spas don't have<br>a <em>lead problem</em>. They have<br>a leakage problem.</h2>
+
+    <div class="problem-grid">
+      <div class="problem-items">
+        <div class="problem-item">
+          <span class="problem-num">01</span>
+          <div class="problem-content">
+            <h4>Slow Response Times</h4>
+            <p>Most inquiries receive a response 4–24 hours later. By then, the lead has already booked elsewhere or gone cold permanently.</p>
+          </div>
+        </div>
+        <div class="problem-item">
+          <span class="problem-num">02</span>
+          <div class="problem-content">
+            <h4>Inconsistent Follow-Up</h4>
+            <p>Front desk teams follow up once or twice. The average purchase decision requires 7+ touchpoints. The gap is your lost revenue.</p>
+          </div>
+        </div>
+        <div class="problem-item">
+          <span class="problem-num">03</span>
+          <div class="problem-content">
+            <h4>Missed Calls, Missed Revenue</h4>
+            <p>Every missed call is a qualified lead who did not get a response. Most are never contacted again. This is recoverable — if you have a system.</p>
+          </div>
+        </div>
+        <div class="problem-item">
+          <span class="problem-num">04</span>
+          <div class="problem-content">
+            <h4>Dormant Lead Databases</h4>
+            <p>Hundreds of inquiries sitting in your CRM have never been re-engaged. Reactivation campaigns on these leads produce predictable, low-cost bookings.</p>
+          </div>
+        </div>
+        <div class="problem-item">
+          <span class="problem-num">05</span>
+          <div class="problem-content">
+            <h4>No Visibility Into Lead Flow</h4>
+            <p>Without clear tracking, there is no way to know where inquiries are lost. You cannot improve what you cannot see.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- LEAK FUNNEL VISUAL -->
+      <div>
+        <div class="leak-visual">
+          <div class="leak-title">// Typical Med Spa Inquiry Funnel</div>
+          <div class="funnel-step full">
+            <span class="funnel-label">Total Inbound Inquiries</span>
+            <span class="funnel-pct green">100%</span>
+          </div>
+          <div class="funnel-step high">
+            <span class="funnel-label">Receive a Response</span>
+            <span class="funnel-pct gold">63%</span>
+          </div>
+          <div class="funnel-step mid">
+            <span class="funnel-label">Reached After Follow-Up</span>
+            <span class="funnel-pct gold">41%</span>
+          </div>
+          <div class="funnel-step low">
+            <span class="funnel-label">Book a Consultation</span>
+            <span class="funnel-pct red">18%</span>
+          </div>
+          <div class="funnel-step vlow">
+            <span class="funnel-label">Convert to Paying Client</span>
+            <span class="funnel-pct red">11%</span>
+          </div>
+          <div style="margin-top:20px; padding-top:20px; border-top:1px solid var(--border);">
+            <div style="font-family:'DM Mono',monospace; font-size:10px; color:var(--text3); letter-spacing:0.08em; line-height:1.8;">
+              89% of your ad spend walks out the door.<br>
+              We fix that — without spending more on acquisition.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES PREVIEW -->
+  <section>
+    <div class="section-tag">
+      <div class="section-tag-line"></div>
+      <span class="section-tag-text">Our Systems</span>
+    </div>
+    <h2 class="section-title">Six focused systems.<br><em>One outcome.</em></h2>
+    <p class="section-body">We do not sell software. We do not sell strategy decks. We install the operational infrastructure that makes your existing lead flow convert at a higher rate.</p>
+
+    <div class="services-grid">
+      <div class="service-card" onclick="showPage('services')">
+        <div class="service-icon">
+          <div class="service-icon-inner"></div>
+          <span class="service-num">01</span>
+        </div>
+        <div class="service-name">Speed-to-Lead System</div>
+        <p class="service-desc">Immediate response infrastructure that contacts every new inquiry within 90 seconds — regardless of when they come in.</p>
+      </div>
+      <div class="service-card" onclick="showPage('services')">
+        <div class="service-icon">
+          <div class="service-icon-inner"></div>
+          <span class="service-num">02</span>
+        </div>
+        <div class="service-name">Follow-Up Sequence Engine</div>
+        <p class="service-desc">Structured, multi-touch follow-up sequences that maintain contact with every unconverted lead across the full decision window.</p>
+      </div>
+      <div class="service-card" onclick="showPage('services')">
+        <div class="service-icon">
+          <div class="service-icon-inner"></div>
+          <span class="service-num">03</span>
+        </div>
+        <div class="service-name">Missed-Call Recovery</div>
+        <p class="service-desc">Automatic systems that identify every missed call and initiate re-contact within minutes — turning lost calls into consultations.</p>
+      </div>
+      <div class="service-card" onclick="showPage('services')">
+        <div class="service-icon">
+          <div class="service-icon-inner"></div>
+          <span class="service-num">04</span>
+        </div>
+        <div class="service-name">Lead Reactivation Campaigns</div>
+        <p class="service-desc">Structured reactivation of dormant leads in your existing database. High-ROI bookings from prospects who have already expressed interest.</p>
+      </div>
+      <div class="service-card" onclick="showPage('services')">
+        <div class="service-icon">
+          <div class="service-icon-inner"></div>
+          <span class="service-num">05</span>
+        </div>
+        <div class="service-name">Consultation Booking System</div>
+        <p class="service-desc">End-to-end booking infrastructure that converts interested leads into confirmed appointments with minimal friction and manual effort.</p>
+      </div>
+      <div class="service-card" onclick="showPage('services')">
+        <div class="service-icon">
+          <div class="service-icon-inner"></div>
+          <span class="service-num">06</span>
+        </div>
+        <div class="service-name">Lead Flow Intelligence</div>
+        <p class="service-desc">Visibility dashboards and reporting that show exactly where inquiries are being lost — so improvements compound over time.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUST BAND -->
+  <div class="trust-band">
+    <span class="trust-label">Built for</span>
+    <div class="trust-divider"></div>
+    <div class="trust-items">
+      <span class="trust-item">Botox & Fillers</span>
+      <span class="trust-item">Laser Treatments</span>
+      <span class="trust-item">Body Contouring</span>
+      <span class="trust-item">Medical Weight Loss</span>
+      <span class="trust-item">Skin Rejuvenation</span>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <h2 class="cta-headline">Ready to recover<br><em>what you're already losing?</em></h2>
+    <p class="cta-sub">No new ad spend. No new offers. Just better conversion of what you already have.</p>
+    <div class="cta-actions">
+      <button class="btn-primary" onclick="showPage('contact')">
+        Request a Revenue Breakdown →
+      </button>
+    </div>
+  </section>
+
+  <footer>
+    <span class="footer-copy">© 2025 Caveat Management. All rights reserved.</span>
+    <ul class="footer-links">
+      <li><a href="#" onclick="showPage('services')">Services</a></li>
+      <li><a href="#" onclick="showPage('process')">Process</a></li>
+      <li><a href="#" onclick="showPage('why')">Why Us</a></li>
+      <li><a href="#" onclick="showPage('contact')">Contact</a></li>
+    </ul>
+  </footer>
+</div>
+
+<!-- ============================= SERVICES PAGE ============================= -->
+<div id="page-services" class="page">
+  <div class="page-hero">
+    <div class="page-hero-content">
+      <div class="hero-tag">
+        <div class="hero-tag-line"></div>
+        <span class="hero-tag-text">Services</span>
+      </div>
+      <h1 class="hero-headline" style="font-size:clamp(40px,5vw,72px);">
+        Six systems.<br><em>One mission.</em>
+      </h1>
+      <p class="hero-sub" style="font-size:18px;">Convert more of the inquiries you are already generating — without increasing your ad spend.</p>
+    </div>
+  </div>
+
+  <div class="services-detail">
+    <!-- Service 01 -->
+    <div class="service-detail-item">
+      <div>
+        <div class="service-detail-tag">System 01 — Speed to Lead</div>
+        <h3 class="service-detail-title">Instant Response Infrastructure</h3>
+        <p class="service-detail-body">The data is clear: a lead contacted within 60–90 seconds is 6–8x more likely to convert than one contacted after 5 minutes. Most med spas respond hours later — or not at all. We install the infrastructure to close that gap permanently.</p>
+        <div class="service-outcomes">
+          <div class="outcome-item"><div class="outcome-dot"></div>Every new inquiry is contacted within 90 seconds</div>
+          <div class="outcome-item"><div class="outcome-dot"></div>24/7 coverage — including evenings and weekends</div>
+          <div class="outcome-item"><div class="outcome-dot"></div>Consistent messaging that qualifies and books</div>
+          <div class="outcome-item"><div class="outcome-dot"></div>Zero front-desk dependency</div>
+        </div>
+      </div>
+      <div class="service-detail-visual">
+        <div class="visual-metric">
+          <div class="visual-metric-label">Average Response Time (Before)</div>
+          <div class="visual-metric-value" style="color:var(--text2);">4–18 hrs</div>
+          <div class="visual-metric-sub">Industry average response window</div>
+        </div>
+        <div class="visual-metric">
+          <div class="visual-metric-label">Response Time (After Install)</div>
+          <div class="visual-metric-value">&lt; 90 sec</div>
+          <div class="visual-metric-sub">Every lead, every time, every channel</div>
+        </div>
+        <div class="visual-metric">
+          <div class="visual-metric-label">Conversion Lift</div>
+          <div class="visual-metric-value">6–8×</div>
+          <div class="visual-metric-sub">Higher close rate vs. delayed response</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Service 02 -->
+    <div class="service-detail-item">
+      <div>
+        <div class="service-detail-tag">System 02 — Follow-Up Engine</div>
+        <h3 class="service-detail-title">Structured Multi-Touch Follow-Up</h3>
+        <p class="service-detail-body">Most purchasing decisions — especially for aesthetic services — require 7 or more meaningful touchpoints. Most med spas follow up once, maybe twice. We install a structured sequence that stays present through the full decision window without being intrusive.</p>
+        <div class="service-outcomes">
+          <div class="outcome-item"><div class="outcome-dot"></div>7-touch follow-up sequences across SMS, email, and voice</div>
+          <div class="outcome-item"><div class="outcome-dot"></div>Spaced intelligently across the lead's decision window</div>
+          <div class="outcome-item"><div class="outcome-dot"></div>Contextual messaging matched to the service inquired about</div>
+          <div class="outcome-item"><div class="outcome-dot"></div>Automatic handoff to your team at the right moment</div>
+        </div>
+      </div>
+      <div class="service-detail-visual">
+        <div class="visual-metric-label" style="font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.15em; text-transform:uppercase; color:var(--text3); margin-bottom:16px;">Follow-Up Sequence Timeline</div>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <div style="display:flex;align-items:center;gap:12px;">
+            <div style="width:48px;font-family:'DM Mono',monospace;font-size:9px;color:var(--accent);letter-spacing:0.1em;">T+90s</div>
+            <div style="flex:1;height:2px;background:var(--accent);opacity:0.8;"></div>
+            <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--text3);">Initial Contact</div>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;">
+            <div style="width:48px;font-family:'DM Mono',monospace;font-size:9px;color:var(--accent);letter-spacing:0.1em;">T+4hr</div>
+            <div style="flex:1;height:2px;background:var(--accent);opacity:0.6;"></div>
+            <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--text3);">Value Follow-Up</div>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;">
+            <div style="width:48px;font-family:'DM Mono',monospace;font-size:9px;color:var(--accent);letter-spacing:0.1em;">T+24hr</div>
+            <div style="flex:1;height:2px;background:var(--accent);opacity:0.5;"></div>
+            <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--text3);">Check-In</div>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;">
+            <div style="width:48px;font-family:'DM Mono',monospace;font-size:9px;color:var(--accent);letter-spacing:0.1em;">T+3d</div>
+            <div style="flex:1;height:2px;background:var(--accent);opacity:0.4;"></div>
+            <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--text3);">Re-Engagement</div>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;">
+            <div style="width:48px;font-family:'DM Mono',monospace;font-size:9px;color:var(--accent);letter-spacing:0.1em;">T+7d</div>
+            <div style="flex:1;height:2px;background:var(--accent);opacity:0.3;"></div>
+            <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--text3);">Social Proof Touch</div>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;">
+            <div style="width:48px;font-family:'DM Mono',monospace;font-size:9px;color:var(--accent);letter-spacing:0.1em;">T+14d</div>
+            <div style="flex:1;height:2px;background:var(--accent);opacity:0.25;"></div>
+            <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--text3);">Offer Touch</div>
+          </div>
+          <div style="display:flex;align-items:center;gap:12px;">
+            <div style="width:48px;font-family:'DM Mono',monospace;font-size:9px;color:var(--accent);letter-spacing:0.1em;">T+21d</div>
+            <div style="flex:1;height:2px;background:var(--accent);opacity:0.2;"></div>
+            <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--text3);">Final Close</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Service 03 -->
+    <div class="service-detail-item">
+      <div>
+        <div class="service-detail-tag">System 03 — Missed-Call Recovery</div>
+        <h3 class="service-detail-title">No Missed Call Left Behind</h3>
+        <p class="service-detail-body">Every missed call is a qualified prospect who took deliberate action to contact you. They are not random; they have intent. Our missed-call recovery system automatically identifies each missed call and initiates re-contact within minutes.</p>
+        <div class="service-outcomes">
+          <div class="outcome-item"><div class="outcome-dot"></div>Automatic detection of every missed call</div>
+          <div class="outcome-item"><div class="outcome-dot"></div>Re-contact initiated within 2–5 minutes</div>
+          <div class="outcome-item"><div class="outcome-dot"></div>Escalation to your team for qualified responses</div>
+          <div class="outcome-item"><div class="outcome-dot"></div>Full tracking and recovery reporting</div>
+        </div>
+      </div>
+      <div class="service-detail-visual">
+        <div class="visual-metric">
+          <div class="visual-metric-label">Avg Missed Calls Per Week (Med Spa)</div>
+          <div class="visual-metric-value" style="color:var(--text2);">23–40</div>
+          <div class="visual-metric-sub">Most never receive a callback</div>
+        </div>
+        <div class="visual-metric">
+          <div class="visual-metric-label">Recovery Rate (With System)</div>
+          <div class="visual-metric-value">68%</div>
+          <div class="visual-metric-sub">Contacts made and re-engaged</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Service 04 -->
+    <div class="service-detail-item">
+      <div>
+        <div class="service-detail-tag">System 04 — Lead Reactivation</div>
+        <h3 class="service-detail-title">Unlock Your Dormant Database</h3>
+        <p class="service-detail-body">Your CRM contains hundreds — sometimes thousands — of leads who expressed interest and were never properly followed up with. These are warm prospects. Structured reactivation campaigns consistently produce bookings at a fraction of the cost of new acquisition.</p>
+        <div class="service-outcomes">
+          <div class="outcome-item"><div class="outcome-dot"></div>Full audit of your existing lead database</div>
+          <div class="outcome-item"><div class="outcome-dot"></div>Segmented re-engagement by service and recency</div>
+          <div class="outcome-item"><div class="outcome-dot"></div>Structured campaign deployed across channels</div>
+          <div class="outcome-item"><div class="outcome-dot"></div>Bookings generated within 7–14 days of launch</div>
+        </div>
+      </div>
+      <div class="service-detail-visual">
+        <div class="visual-metric">
+          <div class="visual-metric-label">Cost Per Reactivated Booking</div>
+          <div class="visual-metric-value">~$0</div>
+          <div class="visual-metric-sub">No new ad spend required</div>
+        </div>
+        <div class="visual-metric">
+          <div class="visual-metric-label">Typical First-Campaign Bookings</div>
+          <div class="visual-metric-value">12–40+</div>
+          <div class="visual-metric-sub">Within 14 days of campaign launch</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="cta-section">
+    <h2 class="cta-headline">See what these systems<br>would recover <em>for your practice.</em></h2>
+    <p class="cta-sub">Request a personalized revenue breakdown. No obligation.</p>
+    <div class="cta-actions">
+      <button class="btn-primary" onclick="showPage('contact')">Request a Breakdown →</button>
+    </div>
+  </section>
+
+  <footer>
+    <span class="footer-copy">© 2025 Caveat Management. All rights reserved.</span>
+    <ul class="footer-links">
+      <li><a href="#" onclick="showPage('home')">Home</a></li>
+      <li><a href="#" onclick="showPage('process')">Process</a></li>
+      <li><a href="#" onclick="showPage('why')">Why Us</a></li>
+      <li><a href="#" onclick="showPage('contact')">Contact</a></li>
+    </ul>
+  </footer>
+</div>
+
+<!-- ============================= PROCESS PAGE ============================= -->
+<div id="page-process" class="page">
+  <div class="page-hero">
+    <div class="page-hero-content">
+      <div class="hero-tag">
+        <div class="hero-tag-line"></div>
+        <span class="hero-tag-text">Our Process</span>
+      </div>
+      <h1 class="hero-headline" style="font-size:clamp(40px,5vw,72px);">
+        From assessment<br>to <em>operational.</em>
+      </h1>
+      <p class="hero-sub" style="font-size:18px;">A structured four-phase engagement designed to install, operate, and optimize your lead recovery system — quickly and with precision.</p>
+    </div>
+  </div>
+
+  <div class="process-track">
+    <div class="process-steps">
+
+      <div class="process-step">
+        <div>
+          <div class="process-step-num">PHASE 01</div>
+          <h3 class="process-step-title">Revenue Audit &<br>Diagnostic</h3>
+          <p class="process-step-body">We begin with a structured diagnostic of your current lead flow — from source to booking. We map exactly where inquiries are entering, where they are being lost, and what the recoverable revenue opportunity looks like. You receive a clear breakdown before we discuss any engagement.</p>
+        </div>
+        <div class="process-panel">
+          <div class="process-panel-title">// Audit Covers</div>
+          <div class="process-action">
+            <div class="process-action-icon"><div class="process-action-dot"></div></div>
+            <span class="process-action-text">Lead source mapping and volume analysis</span>
+          </div>
+          <div class="process-action">
+            <div class="process-action-icon"><div class="process-action-dot"></div></div>
+            <span class="process-action-text">Current response time benchmarking</span>
+          </div>
+          <div class="process-action">
+            <div class="process-action-icon"><div class="process-action-dot"></div></div>
+            <span class="process-action-text">Follow-up sequence review</span>
+          </div>
+          <div class="process-action">
+            <div class="process-action-icon"><div class="process-action-dot"></div></div>
+            <span class="process-action-text">CRM and database assessment</span>
+          </div>
+          <div class="process-action">
+            <div class="process-action-icon"><div class="process-action-dot"></div></div>
+            <span class="process-action-text">Revenue leakage quantification</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="process-step">
+        <div>
+          <div class="process-step-num">PHASE 02</div>
+          <h3 class="process-step-title">System Design<br>& Build</h3>
+          <p class="process-step-body">Based on the audit findings, we design and build the specific systems required for your practice. This is not a template deployment — every system is configured to your services, your market, your existing tools, and your team's workflow. We handle the technical build entirely.</p>
+        </div>
+        <div class="process-panel">
+          <div class="process-panel-title">// What Gets Built</div>
+          <div class="process-action">
+            <div class="process-action-icon"><div class="process-action-dot"></div></div>
+            <span class="process-action-text">Speed-to-lead response infrastructure</span>
+          </div>
+          <div class="process-action">
+            <div class="process-action-icon"><div class="process-action-dot"></div></div>
+            <span class="process-action-text">Multi-touch follow-up sequences</span>
+          </div>
+          <div class="process-action">
+            <div class="process-action-icon"><div class="process-action-dot"></div></div>
+            <span class="process-action-text">Missed-call recovery workflows</span>
+          </div>
+          <div class="process-action">
+            <div class="process-action-icon"><div class="process-action-dot"></div></div>
+            <span class="process-action-text">Booking confirmation and reminder sequences</span>
+          </div>
+          <div class="process-action">
+            <div class="process-action-icon"><div class="process-action-dot"></div></div>
+            <span class="process-action-text">Lead tracking and visibility dashboard</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="process-step">
+        <div>
+          <div class="process-step-num">PHASE 03</div>
+          <h3 class="process-step-title">Installation<br>& Activation</h3>
+          <p class="process-step-body">Systems are installed into your existing stack and tested rigorously before going live. We run activation in a controlled way — beginning with lower-risk sequences and expanding as performance is confirmed. Your team receives clear documentation on what is running and how to operate alongside the system.</p>
+        </div>
+        <div class="process-panel">
+          <div class="process-panel-title">// Activation Timeline</div>
+          <div class="process-action">
+            <div class="process-action-icon"><div class="process-action-dot"></div></div>
+            <span class="process-action-text">Day 1–3: Integration and configuration</span>
+          </div>
+          <div class="process-action">
+            <div class="process-action-icon"><div class="process-action-dot"></div></div>
+            <span class="process-action-text">Day 4–5: Internal testing and QA</span>
+          </div>
+          <div class="process-action">
+            <div class="process-action-icon"><div class="process-action-dot"></div></div>
+            <span class="process-action-text">Day 6–7: Controlled live activation</span>
+          </div>
+          <div class="process-action">
+            <div class="process-action-icon"><div class="process-action-dot"></div></div>
+            <span class="process-action-text">Week 2: Full system live, reactivation launched</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="process-step">
+        <div>
+          <div class="process-step-num">PHASE 04</div>
+          <h3 class="process-step-title">Optimization<br>& Reporting</h3>
+          <p class="process-step-body">We monitor performance on an ongoing basis and make refinements as data accumulates. You receive regular reports with clear visibility into bookings recovered, lead flow, and system performance. The system improves over time — not just at install.</p>
+        </div>
+        <div class="process-panel">
+          <div class="process-panel-title">// Ongoing Delivery</div>
+          <div class="process-action">
+            <div class="process-action-icon"><div class="process-action-dot"></div></div>
+            <span class="process-action-text">Weekly performance reporting</span>
+          </div>
+          <div class="process-action">
+            <div class="process-action-icon"><div class="process-action-dot"></div></div>
+            <span class="process-action-text">Monthly optimization review</span>
+          </div>
+          <div class="process-action">
+            <div class="process-action-icon"><div class="process-action-dot"></div></div>
+            <span class="process-action-text">Sequence refinement based on data</span>
+          </div>
+          <div class="process-action">
+            <div class="process-action-icon"><div class="process-action-dot"></div></div>
+            <span class="process-action-text">Direct access to your account team</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <section class="cta-section">
+    <h2 class="cta-headline">Start with a<br><em>diagnostic.</em> No commitment.</h2>
+    <p class="cta-sub">We will show you the revenue opportunity before we discuss any engagement.</p>
+    <div class="cta-actions">
+      <button class="btn-primary" onclick="showPage('contact')">Request Your Audit →</button>
+    </div>
+  </section>
+
+  <footer>
+    <span class="footer-copy">© 2025 Caveat Management. All rights reserved.</span>
+    <ul class="footer-links">
+      <li><a href="#" onclick="showPage('home')">Home</a></li>
+      <li><a href="#" onclick="showPage('services')">Services</a></li>
+      <li><a href="#" onclick="showPage('why')">Why Us</a></li>
+      <li><a href="#" onclick="showPage('contact')">Contact</a></li>
+    </ul>
+  </footer>
+</div>
+
+<!-- ============================= WHY PAGE ============================= -->
+<div id="page-why" class="page">
+  <div class="page-hero">
+    <div class="page-hero-content">
+      <div class="hero-tag">
+        <div class="hero-tag-line"></div>
+        <span class="hero-tag-text">Why Caveat Management</span>
+      </div>
+      <h1 class="hero-headline" style="font-size:clamp(40px,5vw,72px);">
+        Not an agency.<br>Not software.<br><em>A revenue operator.</em>
+      </h1>
+      <p class="hero-sub" style="font-size:18px;">There is a significant difference between what we do and what most companies in this space offer. That difference is the reason results differ.</p>
+    </div>
+  </div>
+
+  <section>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-card-accent"></div>
+        <h3 class="why-card-title">We are specialists, not generalists</h3>
+        <p class="why-card-body">Caveat Management works exclusively with medical spas. We do not work with restaurants, dentists, real estate agents, or law firms. Our systems, our sequences, and our benchmarks are built entirely around the med spa patient acquisition cycle. This specificity is why our installs produce results faster.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-card-accent"></div>
+        <h3 class="why-card-title">We install — we don't just advise</h3>
+        <p class="why-card-body">We are not a consulting firm that produces recommendations. We build and operate the systems ourselves. When we say a follow-up sequence is running, we mean we built it, tested it, deployed it, and are monitoring its performance. The operational burden does not fall on your team.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-card-accent"></div>
+        <h3 class="why-card-title">We work with your existing demand</h3>
+        <p class="why-card-body">We do not sell advertising. We do not ask you to spend more on acquisition. We recover and convert the demand you already have — leads that are already in your system and going unconverted. This makes our work low-risk and high-leverage from day one.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-card-accent"></div>
+        <h3 class="why-card-title">Visibility comes standard</h3>
+        <p class="why-card-body">Every engagement includes clear reporting on system performance. You know what is running, what it is producing, and what is being optimized. We operate transparently — because our results are worth being transparent about.</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-top:0;">
+    <div class="section-tag">
+      <div class="section-tag-line"></div>
+      <span class="section-tag-text">How We Compare</span>
+    </div>
+    <h2 class="section-title" style="margin-bottom:0;">Caveat vs. the alternatives.</h2>
+
+    <table class="comparison-table">
+      <thead>
+        <tr>
+          <th>Category</th>
+          <th>Caveat Management</th>
+          <th>Generic AI Agency / SaaS</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Industry Focus</td>
+          <td>Med spas exclusively</td>
+          <td>Any business with a pulse</td>
+        </tr>
+        <tr>
+          <td>Delivery Model</td>
+          <td>We build and operate the systems</td>
+          <td>You get a platform login</td>
+        </tr>
+        <tr>
+          <td>New Ad Spend Required</td>
+          <td>None — works on existing demand</td>
+          <td>Often requires continued spend</td>
+        </tr>
+        <tr>
+          <td>Time to First Results</td>
+          <td>7–14 days from activation</td>
+          <td>60–90 days "implementation"</td>
+        </tr>
+        <tr>
+          <td>Reporting</td>
+          <td>Clear, weekly, tied to bookings</td>
+          <td>Vanity metrics dashboards</td>
+        </tr>
+        <tr>
+          <td>Team Burden</td>
+          <td>Minimal — systems run independently</td>
+          <td>Significant internal lift required</td>
+        </tr>
+        <tr>
+          <td>Contract Structure</td>
+          <td>Performance-focused, transparent</td>
+          <td>12-month SaaS lock-in common</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="cta-section">
+    <h2 class="cta-headline">Experience the<br><em>difference in practice.</em></h2>
+    <p class="cta-sub">We will show you the revenue gap in your practice before we ask for anything.</p>
+    <div class="cta-actions">
+      <button class="btn-primary" onclick="showPage('contact')">Request a Breakdown →</button>
+    </div>
+  </section>
+
+  <footer>
+    <span class="footer-copy">© 2025 Caveat Management. All rights reserved.</span>
+    <ul class="footer-links">
+      <li><a href="#" onclick="showPage('home')">Home</a></li>
+      <li><a href="#" onclick="showPage('services')">Services</a></li>
+      <li><a href="#" onclick="showPage('process')">Process</a></li>
+      <li><a href="#" onclick="showPage('contact')">Contact</a></li>
+    </ul>
+  </footer>
+</div>
+
+<!-- ============================= CONTACT PAGE ============================= -->
+<div id="page-contact" class="page">
+  <div class="page-hero">
+    <div class="page-hero-content">
+      <div class="hero-tag">
+        <div class="hero-tag-line"></div>
+        <span class="hero-tag-text">Request a Breakdown</span>
+      </div>
+      <h1 class="hero-headline" style="font-size:clamp(40px,5vw,72px);">
+        Let's look at<br>your <em>revenue gap.</em>
+      </h1>
+      <p class="hero-sub" style="font-size:18px;">Share a few details about your practice. We will prepare a personalized breakdown of your estimated recovery opportunity — at no cost and with no obligation.</p>
+    </div>
+  </div>
+
+  <div class="contact-grid">
+    <div class="contact-form-panel">
+      <div class="dashboard-header" style="margin-bottom:28px;">
+        <span class="dashboard-title">// Practice Information</span>
+        <div class="status-dot"></div>
+      </div>
+
+      <label class="form-label">Practice Name</label>
+      <input id="f_practice" type="text" class="form-input" placeholder="Your Med Spa Name">
+
+      <label class="form-label">Your Name</label>
+      <input id="f_name" type="text" class="form-input" placeholder="Owner or Operations Lead">
+
+      <label class="form-label">Email Address</label>
+      <input id="f_email" type="email" class="form-input" placeholder="you@yourpractice.com">
+
+      <label class="form-label">Monthly Inbound Inquiries (Approx.)</label>
+      <select id="f_inquiries" class="form-select">
+        <option value="" disabled selected>Select a range</option>
+        <option>Under 50</option>
+        <option>50–150</option>
+        <option>150–300</option>
+        <option>300–500</option>
+        <option>500+</option>
+      </select>
+
+      <label class="form-label">Primary Services Offered</label>
+      <input id="f_services" type="text" class="form-input" placeholder="e.g. Botox, Fillers, Laser, Body Contouring">
+
+      <label class="form-label">Biggest Current Challenge (Optional)</label>
+      <textarea id="f_challenge" class="form-textarea" placeholder="Where do you feel most leads are being lost today?"></textarea>
+
+      <button id="submit-btn" class="btn-primary" style="width:100%; justify-content:center;">
+        Request My Revenue Breakdown →
+      </button>
+
+      <div style="margin-top:20px; font-family:'DM Mono',monospace; font-size:10px; color:var(--text3); letter-spacing:0.05em; line-height:1.7; text-align:center;">
+        We respond within one business day. Your information is never shared or sold.
+      </div>
+    </div>
+
+    <div class="contact-info">
+      <h3>What happens<br>after you submit.</h3>
+      <p>We review your practice profile, prepare a custom revenue gap analysis, and reach out to schedule a brief call — typically 20–30 minutes. You will walk away with a clear picture of what is recoverable, what systems would address it, and what working together would look like. There is no pressure and no obligation.</p>
+
+      <div style="display:flex; flex-direction:column; gap:16px; margin-bottom:40px;">
+        <div class="contact-guarantee">
+          <div class="guarantee-title">01 — We prepare your breakdown first</div>
+          <p class="guarantee-body">Before our first call, we prepare a personalized revenue gap analysis specific to your practice size, services, and lead volume. You get value before any commitment.</p>
+        </div>
+        <div class="contact-guarantee">
+          <div class="guarantee-title">02 — We qualify fit together</div>
+          <p class="guarantee-body">Not every practice is the right fit for our systems right now. We will be honest with you about that on the call — and will not pursue engagements where we are not confident we can deliver clear results.</p>
+        </div>
+        <div class="contact-guarantee">
+          <div class="guarantee-title">03 — No long-form sales process</div>
+          <p class="guarantee-body">If there is a fit, we structure a clear engagement proposal within 48 hours. Our process is direct, and our documentation is clean.</p>
+        </div>
+      </div>
+
+      <div style="background:var(--glass); border:1px solid var(--border); padding:28px; position:relative;">
+        <div style="position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(90deg, transparent, var(--accent), transparent);"></div>
+        <div style="font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.15em; text-transform:uppercase; color:var(--text3); margin-bottom:16px;">// Current Availability</div>
+        <div style="font-family:'Cormorant Garamond',serif; font-size:32px; font-weight:300; color:var(--text); margin-bottom:8px;">Accepting 3 new practices<br>this quarter.</div>
+        <div style="font-family:'DM Mono',monospace; font-size:11px; color:var(--text3); letter-spacing:0.05em;">We cap our client count deliberately to maintain operational quality across every engagement.</div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <span class="footer-copy">© 2025 Caveat Management. All rights reserved.</span>
+    <ul class="footer-links">
+      <li><a href="#" onclick="showPage('home')">Home</a></li>
+      <li><a href="#" onclick="showPage('services')">Services</a></li>
+      <li><a href="#" onclick="showPage('process')">Process</a></li>
+      <li><a href="#" onclick="showPage('why')">Why Us</a></li>
+    </ul>
+  </footer>
+</div>
+
+<script>
+  function showPage(name) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    const page = document.getElementById('page-' + name);
+    if (page) {
+      page.classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Update nav active state
+    document.querySelectorAll('.nav-links a').forEach(a => {
+      a.style.color = '';
+    });
+
+    // Animate progress bars on hero load
+    if (name === 'home') {
+      setTimeout(() => {
+        document.querySelectorAll('.progress-fill').forEach(bar => {
+          const w = bar.style.width;
+          bar.style.width = '0';
+          setTimeout(() => bar.style.width = w, 100);
+        });
+      }, 300);
+    }
+  }
+
+  // Trigger entrance animations on load
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      document.querySelectorAll('.progress-fill').forEach(bar => {
+        const w = bar.style.width;
+        bar.style.width = '0';
+        setTimeout(() => bar.style.width = w, 500);
+      });
+    }, 800);
+  });
+
+  // EmailJS form submission
+  document.getElementById('submit-btn').addEventListener('click', function() {
+    const btn = this;
+
+    const practice  = document.getElementById('f_practice').value.trim();
+    const name      = document.getElementById('f_name').value.trim();
+    const email     = document.getElementById('f_email').value.trim();
+    const inquiries = document.getElementById('f_inquiries').value;
+    const services  = document.getElementById('f_services').value.trim();
+    const challenge = document.getElementById('f_challenge').value.trim();
+
+    if (!practice || !name || !email || !inquiries) {
+      btn.textContent = 'Please fill in all required fields.';
+      btn.style.background = '#9e4a4a';
+      setTimeout(() => {
+        btn.textContent = 'Request My Revenue Breakdown →';
+        btn.style.background = '';
+      }, 3000);
+      return;
+    }
+
+    btn.textContent = 'Sending…';
+    btn.style.opacity = '0.7';
+    btn.disabled = true;
+
+    emailjs.send('service_5g8ad4c', 'template_or1hjur', {
+      practice_name:     practice,
+      contact_name:      name,
+      email:             email,
+      monthly_inquiries: inquiries,
+      services:          services || 'Not specified',
+      challenge:         challenge || 'Not provided'
+    }).then(() => {
+      btn.textContent = 'Request Submitted ✓';
+      btn.style.background = 'var(--green)';
+      btn.style.opacity = '1';
+      btn.disabled = false;
+      // Clear fields
+      document.getElementById('f_practice').value  = '';
+      document.getElementById('f_name').value      = '';
+      document.getElementById('f_email').value     = '';
+      document.getElementById('f_inquiries').value = '';
+      document.getElementById('f_services').value  = '';
+      document.getElementById('f_challenge').value = '';
+    }).catch((err) => {
+      console.error('EmailJS error:', err);
+      btn.textContent = 'Something went wrong — please try again.';
+      btn.style.background = '#9e4a4a';
+      btn.style.opacity = '1';
+      btn.disabled = false;
+      setTimeout(() => {
+        btn.textContent = 'Request My Revenue Breakdown →';
+        btn.style.background = '';
+      }, 4000);
+    });
+  });
+</script>
+</body>
+</html>
